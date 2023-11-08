@@ -5,9 +5,22 @@
         </div>
         <div>
             <div class="mb-4" v-if="sections.length">
-                <select class="border-gray-300 p-2 w-1/4" v-model="section_id" @change="chengeH">
-                    <option :value="section_id" selected disabled>Выбирите раздел</option>
+                <select
+                    class="border-gray-300 p-2 w-1/4"
+                    v-model="section_id"
+                    @change="getBranches"
+                >
+                    <option value="null" selected disabled>Выбирите раздел</option>
                     <option v-for="section in sections" :value="section.id">{{section.title}}</option>
+                </select>
+            </div>
+            <div class="mb-4" v-if="branches.length">
+                <select
+                    class="border-gray-300 p-2 w-1/4"
+                    v-model="parent_id"
+                >
+                    <option value="null" selected disabled>Выбирите ветку</option>
+                    <option v-for="branch in branches" :value="branch.id">{{branch.title}}</option>
                 </select>
             </div>
             <div class="mb-4">
@@ -37,17 +50,26 @@ export default {
         return {
             title: '',
             section_id: null,
+            branches: [],
+            parent_id: null,
         }
     },
 
     methods: {
         store() {
-            console.log('dffddf', this.title)
-            this.$inertia.post('/branches', {section_id: this.section_id,title: this.title})
+            this.$inertia.post('/branches', {
+                section_id: this.section_id,
+                title: this.title,
+                parent_id: this.parent_id,
+            })
         },
 
-        chengeH(oe) {
-            console.log(oe.target.value);
+        getBranches() {
+            this.parent_id = null;
+            axios.get(`/sections/${this.section_id}/branches`)
+                .then(res => {
+                    this.branches = res.data;
+                })
         }
     }
 }

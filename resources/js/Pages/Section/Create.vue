@@ -32,7 +32,6 @@ export default {
 
     methods: {
         store() {
-            console.log('dffddf', this.title)
             this.$inertia.post('/sections', {title: this.title})
         }
     }

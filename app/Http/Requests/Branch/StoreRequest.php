@@ -23,7 +23,8 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'section_id' => 'required|integer|exists:sections,id'
+            'section_id' => 'required|integer|exists:sections,id',
+            'parent_id' => 'nullable|integer|exists:branches,id',
         ];
     }
 }

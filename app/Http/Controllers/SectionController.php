@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Section\StoreRequest;
 use App\Http\Requests\Section\UpdateRequest;
 use App\Http\Resources\Branch\BranchResource;
+use App\Http\Resources\Section\SectionWithBranchesResource;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,9 @@ class SectionController extends Controller
      */
     public function index()
     {
-        return inertia('Section/Index');
+        $sections = Section::with('branches')->get();
+        $sections = SectionWithBranchesResource::collection($sections)->resolve();
+        return inertia('Section/Index', compact('sections'));
     }
 
     /**

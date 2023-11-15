@@ -2,6 +2,7 @@
     <div>
         <div class="flex items-center mb-4">
             <h3 class="text-xl mr-4">{{branch.title}}</h3>
+            <Link :href="route('branches.themes.create', branch.id)" class="block w-1/6 px-2 py-1  bg-white border border-gray-3000 rounded-lg text-center">+ Тема</Link>
         </div>
         <div>
             <div v-for="branch in branch.children" class="flex items-center" >
@@ -9,7 +10,7 @@
                     <h3>{{branch.title}}</h3>
                 </Link>
                 <Link class="p-4 block bg-sky-600" :href="route('branches.edit', branch.id)">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" Tstroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-white">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                     </svg>
                 </Link>
